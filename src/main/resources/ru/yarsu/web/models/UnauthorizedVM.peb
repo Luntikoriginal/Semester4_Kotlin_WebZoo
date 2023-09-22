@@ -1,0 +1,20 @@
+    {% extends "./layout.peb" %}
+        {% block title %}
+        Недостаточно прав
+        {% endblock %}
+        {% block heading %}
+        Недостаточно прав
+        {% endblock %}
+    {% block content %}
+    <div class="grid-x align-center-middle">
+        <div class="center">
+            <p>Чтобы посетить страницу нужно авторизоваться</p>
+            <div class="callout alert">
+                <p><b><a href="/">На главную страницу</a></b></p>
+            </div>
+            <div class="callout alert">
+                <p><b><a href="/animals/1?filterType=Все животные">К списку животных</a></b></p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

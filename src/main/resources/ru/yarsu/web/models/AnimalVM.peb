@@ -1,0 +1,21 @@
+    {% extends "./layout.peb" %}
+        {% block title %}
+        Описание животного
+    {% endblock %}
+        {% block heading %}
+        Описание животного
+    {% endblock %}
+    {% block content %}
+        <div class="callout success">
+            <p>Дата и время регистрации: {{ model.animal.datetime | date("yyyy-MM-dd HH:mm") }}</p>
+            <p>Вид животного: {{ model.animal.type }}</p>
+            <p>Имя животного: {{ model.animal.name }}</p>
+            <p>Описание животного: {{ model.animal.description }}</p>
+        </div>
+        <div class="grid-x align-center-middle">
+            <div class="center">
+                <a href="/animals/{{ model.page }}/animal/{{ model.animal.getIndex() }}/edit" class="button">Редактировать</a>
+                <a href="/animals/{{ model.page }}/animal/{{ model.animal.getIndex() }}/delete" class="button">Удалить</a>
+            </div>
+        </div>
+    {% endblock %}

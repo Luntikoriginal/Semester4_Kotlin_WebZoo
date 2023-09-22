@@ -1,0 +1,48 @@
+    {% extends "./layout.peb" %}
+        {% block title %}
+        Вход
+        {% endblock %}
+        {% block heading %}
+        Вход в систему
+        {% endblock %}
+    {% block content %}
+    <form class="grid-container" method="POST">
+        <div class="grid-x grid-padding-x">
+            <div class="cell">
+                <label>Логин:
+                    <input type="text" id="login" name="login" value="{{ model.login }}" required>
+                </label>
+                {% if model.errors.login is not empty %}
+                    <div class="callout alert">
+                        <ul>
+                                {% for error in model.errors.login %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="cell">
+                <label>Пароль:
+                    <input type="password" id="password" name="password" value="{{ model.password }}" required>
+                </label>
+                {% if model.errors.password is not empty %}
+                    <div class="callout alert">
+                        <ul>
+                                {% for error in model.errors.password %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="cell">
+                <button class="button" type="submit">Войти</button>
+            </div>
+        </div>
+    </form>
+    {% endblock %}

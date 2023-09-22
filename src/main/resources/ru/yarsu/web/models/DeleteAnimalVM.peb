@@ -1,0 +1,24 @@
+    {% extends "./layout.peb" %}
+        {% block title %}
+        Удаление животного
+        {% endblock %}
+        {% block heading %}
+        Подтверждение действия
+        {% endblock %}
+    {% block content %}
+    <div class="callout success">
+        <p>Дата и время регистрации: {{ model.animal.datetime | date("yyyy-MM-dd HH:mm") }}</p>
+        <p>Вид животного: {{ model.animal.type }}</p>
+        <p>Имя животного: {{ model.animal.name }}</p>
+        <p>Описание животного: {{ model.animal.description }}</p>
+    </div>
+    <form method="POST">
+        <div class="grid-x align-center-middle">
+            <div class="cell text-center">
+                <p><b>Вы хотите удалить животное из списка?</b></p>
+                <input type="submit" value="Подтвердить" class="button">
+                <a href="/animals/{{ model.page }}/animal/{{ model.index }}" class="button">Отмена</a>
+            </div>
+        </div>
+    </form>
+    {% endblock %}

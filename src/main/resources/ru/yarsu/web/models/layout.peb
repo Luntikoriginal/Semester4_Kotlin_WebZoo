@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="no-js" lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Нет заголовка{% endblock %}</title>
+    <link rel="stylesheet" href="/css/foundation.css">
+    <link rel="stylesheet" href="/css/app.css">
+  </head>
+<body>
+<div class="grid-container">
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text"><strong><em>Зоопарк</em></strong></li>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/animals/1?filterType=Все животные">Список животных</a></li>
+                <li><a href="/animal/create">Добавить новое животное</a> </li>
+                <li><a href="/users">Список пользователей</a></li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="dropdown menu" data-dropdown-menu>
+                {% if model.userContext.isEmpty %}
+                    <li><a href="/user/logIn">{{ model.userContext.login }}</a></li>
+                    <li><a href="/user/signUp">Выйти</a></li>
+                {% else %}
+                    <li><a href="/user/logIn">Войти</a></li>
+                    <li><a href="/user/signUp">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="cell shrink header medium-cell-block-container">
+        <h1 align="center"><strong><em>{% block heading %}Нет заголовка{% endblock %}</em></strong></h1>
+    </div>
+{% block content %}
+    Нет содержимого
+{% endblock %}
+
+</div>
+
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/vendor/what-input.js"></script>
+    <script src="/js/vendor/foundation.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

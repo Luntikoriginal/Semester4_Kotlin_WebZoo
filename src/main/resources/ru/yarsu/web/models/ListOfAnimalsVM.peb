@@ -1,0 +1,82 @@
+    {% extends "./layout.peb" %}
+        {% block title %}
+        Список животных
+    {% endblock %}
+        {% block heading %}
+        Список животных
+    {% endblock %}
+    {% block content %}
+    <form method="GET" class="grid-container">
+        <div class="grid-x padding-x">
+            <div class="cell">
+                <label for="filterType">Выберите вид животного:</label>
+                <select id="filterType" name="filterType">
+                    <option value="Все" {% if model.currentType == "Все животные" %}selected{% endif %}>
+                            Все животные</option>
+                    {% for type in model.types %}
+                        <option value="{{ type }}" {% if model.currentType == type %}selected{% endif %}>
+                                {{ type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="cell">
+                <label>Год (левая граница)
+                <input type="number" name="startYear" value="{{ model.startYear }}" placeholder="Введите год" required>
+                </label>
+            </div>
+            <div class="cell">
+                <label>Год (правая граница)
+                <input type="number" name="endYear" value="{{ model.endYear }}" placeholder="Введите год" required>
+                </label>
+            </div>
+            <div class="cell">
+                <button type="submit" class="button">Применить</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+        {% if model.animals.size > 0 %}
+        <table class="unstriped">
+            <thead>
+                <tr>
+                    <th width="50">Вид животного</th>
+                    <th width="50">Имя животного</th>
+                    <th width="50">Дата и время регистрации</th>
+                    <th width="50">Ссылка на описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for animal in model.animals %}
+                    <tr>
+                        <td>{{ animal.type }}</td>
+                        <td>{{ animal.name }}</td>
+                        <td>{{ animal.datetime | date("yyyy-MM-dd HH:mm") }}</td>
+                        <td><a href="/animals/{{ model.pageNumber }}/animal/{{animal.getIndex()}}">Узнать подробнее</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav aria-label="Pagination">
+            <ul class="pagination text-center">
+                {% if model.pageNumber > 1 %}
+                    <li><a href="{{ model.backPage }}">Предыдущая страница</a></li>
+                    <li><a href="{{ model.firstPage }}">1</a></li>
+                {% else %}
+                    <li class="pagination-previous disabled">Предыдущая страница</li>
+                {% endif %}
+                    <li><b>{{ model.pageNumber }}</b></li>
+                {% if model.pageNumber < model.maxPage %}
+                    <li><a href="{{ model.lastPage }}">{{ model.maxPage }}</a></li>
+                    <li><a href="{{ model.nextPage }}">Следующая страница</a></li>
+                {% else %}
+                    <li class="pagination-next disabled">Следующая страница</li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% else %}
+        <div class="cell text-center">
+            <p><b>Список пуст, попробуйте другие параметры фильтрации<br>
+            Либо вернитесь к <a href="/animals/1?filterType=Все животные">Списку животных</a></b></p>
+        </div>
+        {% endif %}
+    {% endblock %}

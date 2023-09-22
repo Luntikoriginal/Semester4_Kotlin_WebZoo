@@ -1,0 +1,60 @@
+    {% extends "./layout.peb" %}
+        {% block title %}
+        Добавление животного
+        {% endblock %}
+        {% block heading %}
+        Добавление животного
+        {% endblock %}
+    {% block content %}
+    <div class="grid-container">
+        <form method="POST">
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    <label>Вид животного
+                        <input type="text" name="type" placeholder="Введите вид животного" value="{{ model.type }}" required>
+                    </label>
+                    {% if model.errors.type is not empty %}
+                        <div class="callout alert">
+                            <ul>
+                                    {% for error in model.errors.type %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="cell">
+                    <label>Имя животного
+                        <input type="text" name="name" placeholder="Введите имя животного" value="{{ model.name }}" required>
+                    </label>
+                    {% if model.errors.name is not empty %}
+                        <div class="callout alert">
+                            <ul>
+                                    {% for error in model.errors.name %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="cell">
+                    <label>Описание
+                        <textarea name="description" placeholder="Введите описание животного" required>{{ model.description }}</textarea>
+                    </label>
+                    {% if model.errors.description is not empty %}
+                        <div class="callout alert">
+                            <ul>
+                                    {% for error in model.errors.description %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="cell">
+                    <input type="submit" class="button" value="Создать">
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
